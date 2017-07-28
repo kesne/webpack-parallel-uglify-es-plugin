@@ -1,7 +1,7 @@
 import test from 'ava';
 import sinon from 'sinon';
 import os from 'os';
-import uglifyJS from 'uglify-js';
+import uglifyES from 'uglify-es';
 import escodegen from 'escodegen';
 import { parse } from 'acorn';
 import { SourceMapSource } from 'webpack-sources';
@@ -25,7 +25,7 @@ const unminifiedSourceMap = JSON.parse(escodegen.generate(ast, {
   sourceMap: true,
 }));
 
-const { map, code: minifiedSource } = uglifyJS.minify({ x: unminifedSource }, {
+const { map, code: minifiedSource } = uglifyES.minify({ x: unminifedSource }, {
   sourceMap: {
     content: unminifiedSourceMap,
   },
@@ -155,7 +155,7 @@ test('processAssets respects sourceMap:true', (t) => {
   const fakeCompilationObject = createFakeCompilationObject();
   return processAssets(fakeCompilationObject, {
     sourceMap: true,
-    uglifyJS: {},
+    uglifyES: {},
   }).then(() => {
     const assetSourceMap = fakeCompilationObject.assets[filename];
     assertNoError(fakeCompilationObject, t);
@@ -167,7 +167,7 @@ test('processAssets respects sourceMap:false', t => {
   const fakeCompilationObject = createFakeCompilationObject();
   return processAssets(fakeCompilationObject, {
     sourceMap: false,
-    uglifyJS: {},
+    uglifyES: {},
   }).then(() => {
     const assetSourceMap = fakeCompilationObject.assets[filename];
     t.is(assetSourceMap.source(), minifiedSource);
@@ -191,7 +191,7 @@ test('invalid JS should generate an error', (t) => {
 
   let realErrorMessage;
   try {
-    const result = uglifyJS.minify(badCode);
+    const result = uglifyES.minify(badCode);
     if (result.error) throw result.error;
   } catch (e) {
     realErrorMessage = e.message;
@@ -199,7 +199,7 @@ test('invalid JS should generate an error', (t) => {
 
   return processAssets(errorCompilationObject, {
     sourceMap: false,
-    uglifyJS: {},
+    uglifyES: {},
   }).then(() => {
     t.truthy(errorCompilationObject.errors[0].message.includes(realErrorMessage));
   });

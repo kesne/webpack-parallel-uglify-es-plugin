@@ -1,5 +1,5 @@
 import test from 'ava';
-import uglify from 'uglify-js';
+import uglify from 'uglify-es';
 import sinon from 'sinon';
 import tmpFile from '../../lib/tmp-file';
 import cache from '../../lib/cache';
@@ -10,7 +10,7 @@ const rawSource = new RawSource(codeSource);
 const originalSource = new OriginalSource(codeSource);
 const sourceAndMap = rawSource.sourceAndMap();
 const options = {
-  uglifyJS: { },
+  uglifyES: { },
 };
 const originalContent = JSON.stringify({
   source: sourceAndMap.source,

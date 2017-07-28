@@ -1,17 +1,17 @@
-# webpack-parallel-uglify-plugin [![Build Status](https://travis-ci.org/gdborton/webpack-parallel-uglify-plugin.svg?branch=master)](https://travis-ci.org/gdborton/webpack-parallel-uglify-plugin) [![Coverage Status](https://coveralls.io/repos/github/gdborton/webpack-parallel-uglify-plugin/badge.svg?branch=master)](https://coveralls.io/github/gdborton/webpack-parallel-uglify-plugin?branch=master)
+# webpack-parallel-uglify-es-plugin
 
-This plugin serves to help projects with many entry points speed up their builds.  The UglifyJS plugin provided with webpack runs sequentially on each of the output files.  This plugin runs uglify in parallel with one thread for each of your available cpus.  This can lead to significantly reduced build times as minification is very CPU intensive.
+This plugin serves to help projects with many entry points speed up their builds.  The UglifyJS plugin provided with webpack runs sequentially on each of the output files.  This plugin runs uglify-es in parallel with one thread for each of your available cpus.  This can lead to significantly reduced build times as minification is very CPU intensive.
 
 ## Config
 
 Configuring is straightforward.
 
 ```javascript
-import ParallelUglifyPlugin from 'webpack-parallel-uglify-plugin';
+import ParallelUglifyESPlugin from 'webpack-parallel-uglify-es-plugin';
 
 module.exports = {
   plugins: [
-    new ParallelUglifyPlugin({
+    new ParallelUglifyESPlugin({
       // Optional regex, or array of regex to match file against. Only matching files get minified.
       // Defaults to /.js$/, any file ending in .js.
       test,
@@ -20,7 +20,7 @@ module.exports = {
       cacheDir, // Optional absolute path to use as a cache. If not provided, caching will not be used.
       workerCount, // Optional int. Number of workers to run uglify. Defaults to num of cpus - 1 or asset count (whichever is smaller)
       sourceMap, // Optional Boolean. This slows down the compilation. Defaults to false.
-      uglifyJS: {
+      uglifyES: {
         // These pass straight through to uglify.
       },
     }),

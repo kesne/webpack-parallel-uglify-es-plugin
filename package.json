@@ -1,7 +1,7 @@
 {
-  "name": "webpack-parallel-uglify-plugin",
+  "name": "webpack-parallel-uglify-es-plugin",
   "version": "0.4.2",
-  "description": "A webpack plugin to run uglifyjs in parallel.",
+  "description": "A webpack plugin to run uglify-es in parallel.",
   "main": "index.js",
   "scripts": {
     "test": "nyc --reporter=html ava",
@@ -9,11 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/gdborton/webpack-parallel-uglify-plugin.git"
+    "url": "git://github.com/kesne/webpack-parallel-uglify-es-plugin.git"
   },
   "keywords": [
     "webpack",
-    "uglifyjs",
+    "uglifyes",
     "minimize"
   ],
   "author": "Gary Borton <gdborton@gmail.com>",
@@ -37,7 +37,7 @@
     "mkdirp": "^0.5.1",
     "pify": "^3.0.0",
     "tmp": "0.0.29",
-    "uglify-js": "^3.0.21",
+    "uglify-es": "^3.0.26",
     "webpack-sources": "^1.0.0",
     "worker-farm": "^1.3.1"
   },
